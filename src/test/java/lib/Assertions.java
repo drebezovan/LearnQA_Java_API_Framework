@@ -21,4 +21,8 @@ public class Assertions {
     public static void assertResponseCodeEquals(Response Response, int expectedStatusCode){
         assertEquals(expectedStatusCode, Response.getStatusCode(), "Статус код ответа не совпадает с ожидаемым значением");
     }
+
+    public static void assertJsonHasKey(Response Response, String expectedFieldName){
+        Response.then().assertThat().body("$", hasKey(expectedFieldName));
+    }
 }
