@@ -11,6 +11,14 @@ import static io.restassured.RestAssured.given;
 
 public class ApiCoreRequests {
 
+    @Step("Создать GET-запрос")
+    public Response makeGetRequest(String url){
+        return given()
+                .filter(new AllureRestAssured())
+                .get(url)
+                .andReturn();
+    }
+
     @Step("Создать GET-запрос с header и cookie")
     public Response makeGetRequest(String url, String header, String cookie){
         return given()

@@ -1,7 +1,6 @@
 package tests;
 
 import io.qameta.allure.Description;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
 import lib.Assertions;
@@ -19,6 +18,8 @@ public class UserRegisterTest extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
+    @Description("Тест проверяет, создать пользователя с существующим email нельзя")
+    @DisplayName("Негативная проверка создания пользователя с существующим email")
     @Test
     public void testCreateUserWithExistingEmail(){
 
@@ -28,26 +29,22 @@ public class UserRegisterTest extends BaseTestCase {
         userData.put("email", email);
         userData = DataGenerator.getRegistrationData(userData);
 
-        Response responseCreateAuth = RestAssured
-                .given()
-                .body(userData)
-                .post("https://playground.learnqa.ru/api/user/")
-                .andReturn();
+        Response responseCreateAuth = apiCoreRequests.makePostRequest(
+                "https://playground.learnqa.ru/api/user/", userData);
 
         Assertions.assertResponseTextEquals(responseCreateAuth, "Users with email '" + email + "' already exists");
         Assertions.assertResponseCodeEquals(responseCreateAuth, 400);
     }
 
+    @Description("Тест проверяет создание пользователя")
+    @DisplayName("Успешная проверка создания пользователя")
     @Test
     public void testCreateUserSuccessfully(){
 
         Map<String, String> userData = DataGenerator.getRegistrationData();
 
-        Response responseCreateAuth = RestAssured
-                .given()
-                .body(userData)
-                .post("https://playground.learnqa.ru/api/user/")
-                .andReturn();
+        Response responseCreateAuth = apiCoreRequests.makePostRequest(
+                "https://playground.learnqa.ru/api/user/", userData);
 
         Assertions.assertResponseCodeEquals(responseCreateAuth, 200);
         Assertions.assertJsonHasField(responseCreateAuth, "id");
