@@ -15,6 +15,13 @@ public class Assertions {
         assertEquals(expectedValue, value, "Значение из Json не совпадает с ожидаемым значением");
     }
 
+    public static void assertJsonByName(Response Response, String name, String expectedValue) {
+        Response.then().assertThat().body("$", hasKey(name));
+
+        String value = Response.jsonPath().getString(name);
+        assertEquals(expectedValue, value, "Значение из Json не совпадает с ожидаемым значением");
+    }
+
     public static void assertResponseTextEquals(Response Response, String expectedAnswer){
         assertEquals(expectedAnswer, Response.asString(), "Текст ответа не совпадает с ожидаемым значением");
     }
