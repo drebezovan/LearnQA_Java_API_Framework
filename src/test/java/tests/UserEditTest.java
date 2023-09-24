@@ -133,7 +133,7 @@ public class UserEditTest extends BaseTestCase {
                 "https://playground.learnqa.ru/api/user/" + userId
         );
 
-        Assertions.assertJsonHasNotField(responseUserData, "username");
+        Assertions.assertJsonHasField(responseUserData, "username");
         Assertions.assertJsonHasNotField(responseUserData, "firstName");
         Assertions.assertJsonHasNotField(responseUserData, "lastName");
         Assertions.assertJsonHasNotField(responseUserData, "email");

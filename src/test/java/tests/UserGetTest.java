@@ -22,7 +22,7 @@ public class UserGetTest extends BaseTestCase {
         Response responseUserData = apiCoreRequests.makeGetRequest(
                 "https://playground.learnqa.ru/api/user/2");
 
-        Assertions.assertJsonHasNotField(responseUserData, "username");
+        Assertions.assertJsonHasField(responseUserData, "username");
         Assertions.assertJsonHasNotField(responseUserData, "firstName");
         Assertions.assertJsonHasNotField(responseUserData, "lastName");
         Assertions.assertJsonHasNotField(responseUserData, "email");
@@ -67,7 +67,7 @@ public class UserGetTest extends BaseTestCase {
         Response responseUserData = apiCoreRequests.makeGetRequest(
                         "https://playground.learnqa.ru/api/user/1", header, cookie);
 
-        Assertions.assertJsonHasNotField(responseUserData, "username");
+        Assertions.assertJsonHasField(responseUserData, "username");
         Assertions.assertJsonHasNotField(responseUserData, "firstName");
         Assertions.assertJsonHasNotField(responseUserData, "lastName");
         Assertions.assertJsonHasNotField(responseUserData, "email");
