@@ -39,7 +39,7 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
-    @Step("Создать POST-запрос с header и cookie")
+    @Step("Создать POST-запрос")
     public Response makePostRequest(String url, Map<String, String> authData){
         return given()
                 .filter(new AllureRestAssured())

@@ -12,6 +12,9 @@ public class DataGenerator {
         return "learnqa" + timestamp + "@example.com";
     }
 
+      /** Метод принимает один параметр:
+       * если принимает "@", то email имеет форму "@example.com"
+       * иначе - "example.com" */
     public static Map<String, String> getRegistrationData(){
         Map<String, String> data = new HashMap<>();
         data.put("email", DataGenerator.getRandomEmail());
@@ -23,8 +26,8 @@ public class DataGenerator {
     }
 
     public static Map<String, String> getRegistrationData(Map<String, String> nonDefaultValues){
-        Map<String, String> defaultValues = DataGenerator.getRegistrationData();
 
+        Map<String, String> defaultValues = DataGenerator.getRegistrationData();
         Map<String, String> userData = new HashMap<>();
         String[] keys = {"email", "password", "username", "firstName", "lastName"};
 
