@@ -55,4 +55,24 @@ public class ApiCoreRequests {
                 .post(url)
                 .andReturn();
     }
+
+    @Step("Создать PUT-запрос с header и cookie")
+    public Response makePutRequest(String url, String header, String cookie, Map<String, String> editData){
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new Header("x-csrf-token", header))
+                .cookie("auth_sid", cookie)
+                .body(editData)
+                .put(url)
+                .andReturn();
+    }
+
+    @Step("Создать PUT-запрос")
+    public Response makePutRequest(String url, Map<String, String> editData){
+        return given()
+                .filter(new AllureRestAssured())
+                .body(editData)
+                .put(url)
+                .andReturn();
+    }
 }
